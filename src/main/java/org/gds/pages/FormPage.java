@@ -1,14 +1,11 @@
 package org.gds.pages;
 
 import org.gds.utils.AndroidActions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
@@ -57,7 +54,8 @@ public class FormPage extends AndroidActions{
 		driver.findElement(AppiumBy.xpath("//android.widget.TextView[@resource-id='android:id/text1' and @text='"+countryName+"']")).click();
 	}
 	
-	public void submitForm() {
+	public ProductCatalogPage submitForm() {
 		buttonLetsShop.click();
+		return new ProductCatalogPage(driver);
 	}
 }

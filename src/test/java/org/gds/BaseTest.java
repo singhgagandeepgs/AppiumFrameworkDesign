@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 
+import org.gds.pages.FormPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
@@ -21,6 +22,7 @@ public class BaseTest {
 
 	AndroidDriver driver;
 	AppiumDriverLocalService service;
+	FormPage formPage;
 
 	@BeforeClass
 	public void configureAppium() throws MalformedURLException, URISyntaxException {
@@ -44,6 +46,7 @@ public class BaseTest {
 
 		driver = new AndroidDriver(appiumServer, options);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		formPage = new FormPage(driver);
 	}
 
 	@AfterClass
@@ -54,12 +57,6 @@ public class BaseTest {
 		if (service != null) {
 			service.stop();
 		}
-	}
-
-	public double returnFormattedPrice(String amountString) {
-		String removedDollar = amountString.replace("$", "").trim();
-		Double productPrice = Double.parseDouble(removedDollar);
-		return productPrice;
 	}
 
 	public void addProductToCart(String productName) {
