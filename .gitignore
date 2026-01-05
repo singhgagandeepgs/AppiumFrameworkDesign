@@ -1,0 +1,10 @@
+/target
+/test-output
+/.idea
+.classpath
+.project
+.settings/
+*.log
+*.iml
+.DS_Store
+node_modules
