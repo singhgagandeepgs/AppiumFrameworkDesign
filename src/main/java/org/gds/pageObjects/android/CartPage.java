@@ -1,8 +1,9 @@
-package org.gds.pages;
+package org.gds.pageObjects.android;
 
 import java.util.List;
 
 import org.gds.utils.AndroidActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -41,6 +42,12 @@ public class CartPage extends AndroidActions{
 	@AndroidFindBy(id = "com.androidsample.generalstore:id/btnProceed")
 	private WebElement buttonCompletePurchase;
 	
+	By locPageTitle = By.id("com.androidsample.generalstore:id/toolbar_title");
+	
+	public By getLocatorOfPageTitle() {
+		return locPageTitle;
+	}
+	
 	public List<WebElement> getProductList(){
 		return productList;
 	}
@@ -69,12 +76,6 @@ public class CartPage extends AndroidActions{
 	
 	public void checkPromotionalEmailsCheckbox() {
 		checkboxPromotions.click();
-	}
-	
-	public double returnFormattedPrice(String amountString) {
-		String removedDollar = amountString.replace("$", "").trim();
-		Double productPrice = Double.parseDouble(removedDollar);
-		return productPrice;
 	}
 	
 	public void submitOrder() {

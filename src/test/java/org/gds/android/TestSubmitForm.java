@@ -1,5 +1,5 @@
 
-package org.gds;
+package org.gds.android;
 
 import org.testng.annotations.Test;
 

@@ -1,4 +1,4 @@
-package org.gds.pages;
+package org.gds.pageObjects.android;
 
 import java.util.List;
 

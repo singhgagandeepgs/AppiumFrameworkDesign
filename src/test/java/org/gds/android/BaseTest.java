@@ -1,4 +1,4 @@
-package org.gds;
+package org.gds.android;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 
-import org.gds.pages.FormPage;
+import org.gds.pageObjects.android.FormPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
