@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class TestValidateCartTotal extends BaseTest {
@@ -16,12 +17,12 @@ public class TestValidateCartTotal extends BaseTest {
 	ProductCatalogPage catalogPage;
 	CartPage cartPage;
 
-	@Test
-	public void testValidateCartTotal() throws InterruptedException {
+	@Test(dataProvider = "getData")
+	public void testValidateCartTotal(String name, String gender, String country) throws InterruptedException {
 
-		formPage.setNameField("Harleen Kaur");
-		formPage.setGender("Female");
-		formPage.selectCountry("Canada");
+		formPage.setNameField(name);
+		formPage.setGender(gender);
+		formPage.selectCountry(country);
 		catalogPage = formPage.submitForm();
 
 		catalogPage.addToCartByIndex(0);
@@ -51,6 +52,11 @@ public class TestValidateCartTotal extends BaseTest {
 		cartPage.submitOrder();
 
 		Thread.sleep(3000);
+	}
+	
+	@DataProvider
+	public Object[][] getData(){
+		return new Object[][] {{"Harleen Kaur", "Female", "Canada"}};
 	}
 }
 
