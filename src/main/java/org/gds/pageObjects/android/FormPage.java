@@ -34,6 +34,9 @@ public class FormPage extends AndroidActions{
 	@AndroidFindBy(className = "android.widget.Button")
 	private WebElement buttonLetsShop;
 	
+	@AndroidFindBy(xpath = "//android.widget.Toast")
+	private WebElement errorToast;
+	
 	public void setNameField(String name) {
 		nameField.sendKeys(name);
 		driver.hideKeyboard();
@@ -57,5 +60,9 @@ public class FormPage extends AndroidActions{
 	public ProductCatalogPage submitForm() {
 		buttonLetsShop.click();
 		return new ProductCatalogPage(driver);
+	}
+	
+	public String getErrorToastMsg() {
+		return errorToast.getAttribute("name");
 	}
 }
