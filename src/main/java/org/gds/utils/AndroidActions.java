@@ -10,8 +10,10 @@ import com.google.common.collect.ImmutableMap;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
-public class AndroidActions extends AppiumUtils{
+public class AndroidActions extends AppiumUtils {
 
 	private AndroidDriver driver;
 
@@ -82,5 +84,17 @@ public class AndroidActions extends AppiumUtils{
 	public void gestureDragDrop(WebElement element, int dropCordX, int dropCordY) {
 		((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of("elementId",
 				((RemoteWebElement) element).getId(), "endX", dropCordX, "endY", dropCordY));
+	}
+
+	public void navigateBack() {
+		driver.pressKey(new KeyEvent(AndroidKey.BACK));
+	}
+
+	public void pressEnter() {
+		driver.pressKey(new KeyEvent(AndroidKey.ENTER));
+	}
+	
+	public void pressHomeKey() {
+		driver.pressKey(new KeyEvent(AndroidKey.HOME));
 	}
 }

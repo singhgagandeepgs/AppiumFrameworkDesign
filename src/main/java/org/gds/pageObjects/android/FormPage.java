@@ -1,8 +1,11 @@
 package org.gds.pageObjects.android;
 
 import org.gds.utils.AndroidActions;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import com.google.common.collect.ImmutableMap;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -64,5 +67,10 @@ public class FormPage extends AndroidActions{
 	
 	public String getErrorToastMsg() {
 		return errorToast.getAttribute("name");
+	}
+	
+	public void setAppActivityToFormPage() {
+		((JavascriptExecutor) driver).executeScript("mobile: startActivity", ImmutableMap.of("intent",
+				"com.androidsample.generalstore/com.androidsample.generalstore.SplashActivity"));
 	}
 }
