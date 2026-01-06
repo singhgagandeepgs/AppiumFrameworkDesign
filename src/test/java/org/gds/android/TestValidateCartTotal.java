@@ -1,6 +1,10 @@
 
 package org.gds.android;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import org.gds.pageObjects.android.CartPage;
 import org.gds.pageObjects.android.ProductCatalogPage;
 import org.testng.Assert;
@@ -13,11 +17,11 @@ public class TestValidateCartTotal extends BaseTest {
 	CartPage cartPage;
 
 	@Test(dataProvider = "getData")
-	public void testValidateCartTotal(String name, String gender, String country) throws InterruptedException {
+	public void testValidateCartTotal(HashMap<String, String> input) throws InterruptedException {
 
-		formPage.setNameField(name);
-		formPage.setGender(gender);
-		formPage.selectCountry(country);
+		formPage.setNameField(input.get("name"));
+		formPage.setGender(input.get("gender"));
+		formPage.selectCountry(input.get("country"));
 		catalogPage = formPage.submitForm();
 
 		catalogPage.addToCartByIndex(0);
@@ -50,9 +54,15 @@ public class TestValidateCartTotal extends BaseTest {
 	}
 
 	@DataProvider
-	public Object[][] getData() {
-		return new Object[][] { { "Harleen Kaur", "Female", "Antarctica" },
-				{ "Harmeet Singh", "Male", "American Samoa" } };
+	public Object[][] getData() throws IOException {
+		String jsonFilePath = System.getProperty("user.dir") + "\\src\\test\\java\\org\\gds\\testData\\ecom.json";
+		List<HashMap<String, String>> data = getJsonDataToMap(jsonFilePath);
+		/*
+		 * return new Object[][] { { "Harleen Kaur", "Female", "Antarctica" }, {
+		 * "Harmeet Singh", "Male", "American Samoa" } };
+		 */
+		
+		return new Object[][] { { data.get(0)}, { data.get(1)} };
 	}
 }
 

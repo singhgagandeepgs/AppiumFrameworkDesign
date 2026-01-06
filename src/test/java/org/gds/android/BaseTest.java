@@ -8,6 +8,7 @@ import java.net.URL;
 import java.time.Duration;
 
 import org.gds.pageObjects.android.FormPage;
+import org.gds.utils.AppiumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
@@ -18,7 +19,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-public class BaseTest {
+public class BaseTest extends AppiumUtils{
 
 	AndroidDriver driver;
 	AppiumDriverLocalService service;
