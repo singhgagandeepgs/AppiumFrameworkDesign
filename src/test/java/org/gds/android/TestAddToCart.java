@@ -2,6 +2,7 @@
 package org.gds.android;
 
 import org.gds.pageObjects.android.ProductCatalogPage;
+import org.gds.testUtils.BaseTest;
 import org.testng.annotations.Test;
 
 public class TestAddToCart extends BaseTest {

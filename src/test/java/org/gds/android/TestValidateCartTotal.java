@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.gds.pageObjects.android.CartPage;
 import org.gds.pageObjects.android.ProductCatalogPage;
+import org.gds.testUtils.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

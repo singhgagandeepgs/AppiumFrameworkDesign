@@ -1,11 +1,12 @@
-package org.gds.android;
+package org.gds.testUtils;
 
-import java.io.File;
-import java.net.MalformedURLException;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Properties;
 
 import org.gds.pageObjects.android.FormPage;
 import org.gds.utils.AppiumUtils;
@@ -17,28 +18,31 @@ import org.testng.annotations.BeforeClass;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 
 public class BaseTest extends AppiumUtils{
 
 	AndroidDriver driver;
 	AppiumDriverLocalService service;
-	FormPage formPage;
+	protected FormPage formPage;
+	Properties properties;
 
 	@BeforeClass
-	public void configureAppium() throws MalformedURLException, URISyntaxException {
-		service = new AppiumServiceBuilder()
-				.withAppiumJS(
-						new File("C:\\Users\\singh\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
-				.withIPAddress("127.0.0.1").usingPort(4723).build();
+	public void configureAppium() throws IOException {
+		
+		String propFilePath = System.getProperty("user.dir") + "\\src\\main\\java\\org\\gds\\resources\\globalConfig.properties";
+		properties = readPropertiesFile(propFilePath);
+		
+		String ipAddress = properties.getProperty("ipAddress");
+		String port = properties.getProperty("port");
+		String deviceName = properties.getProperty("deviceName");
+		
+		service = startAppiumServer(ipAddress, Integer.parseInt(port));
 
-		// service.start();
-
-		URL appiumServer = new URI("http://127.0.0.1:4723/").toURL();
+		URL appiumServer = service.getUrl();
 
 		UiAutomator2Options options = new UiAutomator2Options();
-		options.setDeviceName("GagansEmulator");
-		options.setApp("F:\\appium-workspace\\AppiumLearning\\src\\test\\java\\resources\\General-Store.apk");
+		options.setDeviceName(deviceName);
+		options.setApp(System.getProperty("user.dir")+"\\src\\test\\java\\org\\gds\\testResources\\General-Store.apk");
 
 		// New statement added myself (Not in tutorial) to handle webview Chrome compatibility error
 		options.setCapability("appium:chromedriverAutodownload", true);

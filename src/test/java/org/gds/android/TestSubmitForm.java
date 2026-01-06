@@ -1,6 +1,7 @@
 
 package org.gds.android;
 
+import org.gds.testUtils.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
